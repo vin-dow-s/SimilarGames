@@ -15,10 +15,11 @@ body {
     overflow-x: hidden;
 }
 
-.lobster-two-regular {
-    font-family: "Lobster Two", sans-serif;
-    font-weight: 400;
+.protest-riot-regular {
+    font-family: "Protest Riot", sans-serif;
+    font-weight: 300;
     font-style: normal;
+    font-size: small;
 }
 
 a {

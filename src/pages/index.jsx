@@ -107,7 +107,7 @@ export default function Home() {
                         : "lg:justify-start lg:pt-44 justify-start"
                 } min-h-dvh py-8 px-4 sm:px-6 lg:px-8`}
             >
-                <h1 className="text-4xl lg:text-5xl font-bold lobster-two-regular mt-12">
+                <h1 className="text-4xl lg:text-5xl font-bold protest-riot-regular mt-12">
                     Find Similar Videogames
                 </h1>
                 <form className="mt-6 w-full max-w-lg mb-12">
@@ -122,7 +122,7 @@ export default function Home() {
                             }}
                             placeholder="Enter the title of a game..."
                             required
-                            className="flex-1 px-6 py-3  border-gray-300 rounded-l-md focus:outline-none focus:ring-2 focus:ring-indigo-600 focus:border-indigo-600"
+                            className="flex-1 px-6 py-3  border-gray-300 rounded-l-md focus:outline-none focus:ring-2 focus:ring-orange-600 focus:border-orange-600"
                             onBlur={() => {
                                 setTimeout(() => setShowSuggestions(false), 100)
                             }}
@@ -185,7 +185,7 @@ export default function Home() {
                             }}
                             type="submit"
                             disabled={loading}
-                            className="relative flex justify-center items-center w-16 h-12 text-white bg-indigo-600 rounded-r-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-600 focus:ring-opacity-50"
+                            className="relative flex justify-center items-center w-16 h-12 text-white bg-orange-600 rounded-r-md hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-orange-600 focus:ring-opacity-50"
                         >
                             {loading ? (
                                 <div className="dot-flashing"></div>
