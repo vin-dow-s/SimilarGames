@@ -94,7 +94,7 @@ export default function Home() {
     return (
         <>
             <Head>
-                <title>Find Similar Videogames</title>
+                <title>Find Similar Video Games</title>
                 <meta
                     name="description"
                     content="Search for a videogame and get similar suggestions based on its description."
@@ -107,8 +107,8 @@ export default function Home() {
                         : "lg:justify-start lg:pt-44 justify-start"
                 } min-h-dvh py-8 px-4 sm:px-6 lg:px-8`}
             >
-                <h1 className="text-4xl lg:text-5xl font-bold protest-riot-regular mt-12">
-                    Find Similar Videogames
+                <h1 className="text-4xl lg:text-5xl font-bold bubblegum-sans-regular mt-12">
+                    Find Similar Video Games
                 </h1>
                 <form className="mt-6 w-full max-w-lg mb-12">
                     <div className="relative flex items-center w-full max-w-lg">
@@ -120,7 +120,7 @@ export default function Home() {
                                 setShowSuggestions(true)
                                 setLoading(true)
                             }}
-                            placeholder="Enter the title of a game..."
+                            placeholder="Enter the title of a video game..."
                             required
                             className="flex-1 px-6 py-3  border-gray-300 rounded-l-md focus:outline-none focus:ring-2 focus:ring-orange-600 focus:border-orange-600"
                             onBlur={() => {
@@ -187,7 +187,7 @@ export default function Home() {
                             disabled={loading}
                             className="relative flex justify-center items-center w-16 h-12 text-white bg-orange-600 rounded-r-md hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-orange-600 focus:ring-opacity-50"
                         >
-                            {loading ? (
+                            {!loading ? (
                                 <div className="dot-flashing"></div>
                             ) : (
                                 <Image
