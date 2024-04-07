@@ -4,7 +4,7 @@ const nextConfig = {
         remotePatterns: [
             {
                 protocol: "https",
-                hostname: "books.google.com",
+                hostname: "images.igdb.com",
             },
         ],
     },

@@ -1,11 +1,11 @@
-# Find Similar Videogames 📚
+# Find Similar Video Games 🎮
 
-Search for a game and get similar suggestions based on its description.
-<br/><br/>Current results: `3 videogames that share with the provided game a common style, universe or gameplay mechanics.`
+Search for a video game and get similar suggestions based on its description.
+<br/><br/>Current results: `3 video games that share with the provided game a common style, universe or gameplay mechanics.`
 
 ## Features
 
--   **Search Functionality**: Allows users to search for videogames using the IGDB API.
+-   **Search Functionality**: Allows users to search for video games using the IGDB API.
 -   **Game Suggestions**: Offers a dynamically updated dropdown of games titles as the user types (with thumbnails).
 -   **Similar Games**: On selecting a game, the app gets the game description from IGDB API, sends it to OpenAI API which returns 3 similar games titles, then the app fetches their data from IGDB API.
 -   **Responsive Design**: Adapts to different screen sizes for an optimal viewing experience.

@@ -46,7 +46,7 @@ export default function Home() {
 
     //Function to handle game selection from suggestions
     const handleSelectGame = (suggestion) => {
-        setGameTitle(suggestion.volumeInfo.title)
+        setGameTitle(suggestion.name)
         setSelectedGame(suggestion)
         setShowSuggestions(false)
         handleFetchSimilarGames(suggestion)
@@ -59,7 +59,7 @@ export default function Home() {
         setLoadingSimilarGames(true)
 
         try {
-            const gameDescription = selectedGame.volumeInfo.description
+            const gameDescription = selectedGame.name
 
             //Fetch titles of similar books based on the description of the selected book
             const similarGamesRes = await fetch(
@@ -79,10 +79,9 @@ export default function Home() {
                 body: JSON.stringify({ titles: similarGamesTitles }),
             })
             const gamesData = await gamesDataRes.json()
+            console.log("🚀 ~ handleFetchSimilarGames ~ gamesData:", gamesData)
 
-            const limitedGamesData = gamesData.items.slice(0, 3)
-
-            setSimilarGames(limitedGamesData)
+            setSimilarGames(gamesData)
         } catch (error) {
             console.error("Error:", error)
         } finally {
@@ -102,7 +101,8 @@ export default function Home() {
             </Head>
             <div
                 className={`relative flex flex-col items-center ${
-                    loadingSimilarGames || similarGames.length > 0
+                    loadingSimilarGames ||
+                    (similarGames.games && similarGames.games.length > 0)
                         ? "justify-center"
                         : "lg:justify-start lg:pt-44 justify-start"
                 } min-h-dvh py-8 px-4 sm:px-6 lg:px-8`}
@@ -148,17 +148,15 @@ export default function Home() {
                                                     maxWidth: "90%",
                                                 }}
                                             >
-                                                {suggestion.volumeInfo.title}
+                                                {suggestion.name}
                                             </span>
                                         </div>
-                                        {suggestion.volumeInfo.imageLinks
-                                            ?.thumbnail && (
+                                        {suggestion.cover && (
                                             <Image
-                                                src={suggestion.volumeInfo.imageLinks.thumbnail.replace(
-                                                    "http:",
-                                                    "https:"
-                                                )}
-                                                alt={`Cover of the game ${suggestion.volumeInfo.title}`}
+                                                src={`https://images.igdb.com/igdb/image/upload/t_cover_big/${suggestion.cover.url
+                                                    .split("/")
+                                                    .pop()}`}
+                                                alt={`Cover of the game ${suggestion.name}`}
                                                 width={0}
                                                 height={0}
                                                 sizes="100vw"
@@ -187,7 +185,7 @@ export default function Home() {
                             disabled={loading}
                             className="relative flex justify-center items-center w-16 h-12 text-white bg-orange-600 rounded-r-md hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-orange-600 focus:ring-opacity-50"
                         >
-                            {!loading ? (
+                            {loading ? (
                                 <div className="dot-flashing"></div>
                             ) : (
                                 <Image
@@ -231,33 +229,31 @@ export default function Home() {
                         </ul>
                     </div>
                 ) : (
-                    similarGames.length > 0 && (
+                    similarGames.games &&
+                    similarGames.games.length > 0 && (
                         <div className="mt-8 mb-20 w-full max-w-6xl">
                             <ul className="list-none flex flex-wrap -mx-2">
-                                {similarGames.map(
-                                    (book, index) =>
-                                        book && (
+                                {similarGames.games.map(
+                                    (game, index) =>
+                                        game && (
                                             <li
                                                 key={index}
                                                 className="w-full md:w-1/3 lg:w-1/3 xl:w-1/3  max-sm:mb-16 p-2 flex flex-col items-center"
                                             >
-                                                {book.volumeInfo.imageLinks
-                                                    ?.thumbnail && (
+                                                {game.cover && (
                                                     <a
-                                                        href={
-                                                            book.volumeInfo
-                                                                .infoLink
-                                                        }
+                                                        href={`https://www.igdb.com/games/${encodeURIComponent(
+                                                            game.name
+                                                        )}`}
                                                         target="_blank"
                                                         rel="noopener noreferrer"
                                                     >
                                                         <div className="relative w-32 h-48 rounded cursor-pointer">
                                                             <Image
-                                                                src={book.volumeInfo.imageLinks.thumbnail.replace(
-                                                                    "http:",
-                                                                    "https:"
-                                                                )}
-                                                                alt={`Cover of the game ${book.volumeInfo.title}`}
+                                                                src={`https://images.igdb.com/igdb/image/upload/t_cover_big/${game.cover.url
+                                                                    .split("/")
+                                                                    .pop()}`}
+                                                                alt={`Cover of the game ${game.name}`}
                                                                 sizes="100vw"
                                                                 width={0}
                                                                 height={0}
@@ -272,26 +268,26 @@ export default function Home() {
                                                 )}
                                                 <div className="content-center text-center">
                                                     <h3 className="text-xl font-semibold mt-4">
-                                                        {book.volumeInfo
-                                                            .title &&
-                                                        book.volumeInfo.title
-                                                            .length > 30
-                                                            ? book.volumeInfo.title.substring(
+                                                        {game.name &&
+                                                        game.name.length > 30
+                                                            ? game.name.substring(
                                                                   0,
                                                                   30
                                                               ) + "..."
-                                                            : book.volumeInfo
-                                                                  .title}
+                                                            : game.name}
                                                     </h3>
 
                                                     <p className="text-gray-300 text-sm">
-                                                        {
-                                                            book.volumeInfo
-                                                                .authors[0]
-                                                        }
+                                                        {game.genres
+                                                            .slice(0, 3)
+                                                            .map(
+                                                                (genre) =>
+                                                                    genre.name
+                                                            )
+                                                            .join(", ")}
                                                     </p>
                                                     <p className="text-gray-400 text-sm pt-4 text-left">
-                                                        {book.volumeInfo.description?.substring(
+                                                        {game.summary?.substring(
                                                             0,
                                                             400
                                                         )}
