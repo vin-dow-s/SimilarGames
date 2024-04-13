@@ -278,13 +278,14 @@ export default function Home() {
                                                     </h3>
 
                                                     <p className="text-gray-300 text-sm">
-                                                        {game.genres
-                                                            .slice(0, 3)
-                                                            .map(
-                                                                (genre) =>
-                                                                    genre.name
-                                                            )
-                                                            .join(", ")}
+                                                        {game.genres &&
+                                                            game.genres
+                                                                .slice(0, 3)
+                                                                .map(
+                                                                    (genre) =>
+                                                                        genre.name
+                                                                )
+                                                                .join(", ")}
                                                     </p>
                                                     <p className="text-gray-400 text-sm pt-4 text-left">
                                                         {game.summary?.substring(
