@@ -176,9 +176,7 @@ export default function Home() {
                             onClick={(event) => {
                                 event.preventDefault()
                                 selectedGame &&
-                                    (setGameTitle(
-                                        selectedGame.volumeInfo.title
-                                    ),
+                                    (setGameTitle(selectedGame.name),
                                     handleFetchSimilarGames(selectedGame))
                             }}
                             type="submit"
