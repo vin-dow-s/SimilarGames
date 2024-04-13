@@ -79,7 +79,6 @@ export default function Home() {
                 body: JSON.stringify({ titles: similarGamesTitles }),
             })
             const gamesData = await gamesDataRes.json()
-            console.log("🚀 ~ handleFetchSimilarGames ~ gamesData:", gamesData)
 
             setSimilarGames(gamesData)
         } catch (error) {
